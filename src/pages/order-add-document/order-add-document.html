@@ -1,0 +1,50 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ customTitle | translate }}</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+                <span ion-text color="primary">Cerrar</span>
+            </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+
+    <ion-item>
+      <ion-label stacked>Nota</ion-label>
+      <ion-textarea rows="6" [(ngModel)]="text" type="textarea" value=""></ion-textarea>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-row>
+    <ion-col text-center>
+      <img *ngIf="signature" [src]="signature" />
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <button (click)="getFromCamera()" ion-button full icon-left><ion-icon name="camera"></ion-icon> Cámara </button>
+    </ion-col>
+    <ion-col center>
+      <button (click)="getFromGallery()" ion-button full icon-left><ion-icon name="images"></ion-icon> Galería </button>
+    </ion-col>
+    <ion-col right>
+      <button (click)="openSignature()" ion-button full icon-left><ion-icon name="create"></ion-icon> Firma </button>
+    </ion-col>
+  </ion-row>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <button block ion-button (click)="upload()" color="primary">
+        Guardar
+      </button>
+  </ion-toolbar>
+</ion-footer>
