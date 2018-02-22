@@ -1,1 +1,3 @@
 ## Mideas App
+
+App multipropósito
