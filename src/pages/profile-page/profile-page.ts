@@ -33,6 +33,12 @@ export class ProfilePage extends ProtectedPage {
     });
   }
 
+  openPageLink(page: any) {
+    if (page) {
+      this.configService.setActivePage(page);
+    }
+  }
+
   openPage(id_menu: number) {
     if (this.configService.menu.pages[id_menu]) {
       this.configService.setActivePage(this.configService.menu.pages[id_menu]);

@@ -7,12 +7,14 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import *  as AppConfig from '../../app/config';
 import *  as AppMenu from '../../app/menu';
+import *  as AppShortcuts from '../../app/home_shortcuts';
 
 @Injectable()
 export class ConfigServiceProvider {
   public cfg: any;
   public remoteCfg: any;
   public menu: any;
+  public home_shortcuts: any;
   public currentSite: any;
 
   public appSettings: any;
@@ -28,6 +30,7 @@ export class ConfigServiceProvider {
     this.cfg = AppConfig.cfg;
     this.appSettings = this.cfg.config_settings;
     this.menu = AppMenu.menu;
+    this.home_shortcuts = AppShortcuts.shortcuts;
     this.theme = new BehaviorSubject('blue-theme');
     this.currentPage = new BehaviorSubject(null);
   }

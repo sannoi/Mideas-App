@@ -13,7 +13,7 @@
   <ion-grid>
     <ion-row>
       <ion-col col-4 *ngFor="let image of item.parametros.galeria">
-        <img [src]="baseUrl(image.img)">
+        <img [src]="generateThumbnail(baseUrl(image.img))">
       </ion-col>
     </ion-row>
   </ion-grid>

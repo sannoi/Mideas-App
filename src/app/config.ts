@@ -1,8 +1,5 @@
 export let cfg = {
-  baseUrl: 'https://lastmile.mideas.es',
-  apiUrl: 'https://lastmile.mideas.es/api',
   configUrl: '/sistema/general/config.json',
-  tokenName: 'token',
   home_not_logged: 'WelcomePage',
   home_logged: 'ProfilePage',
   sites: [

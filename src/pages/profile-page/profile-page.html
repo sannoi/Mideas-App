@@ -32,19 +32,17 @@
       </ion-col>
     </ion-row>
 	<hr/>-->
-	<ion-card>
+	<ion-card *ngFor="let shortcut of configService.home_shortcuts">
 	<ion-list>
-		<button ion-item (click)="openPage(1)">
-			<ion-avatar item-start>
-				<img src="assets/img/envios_disponibles.png">
-			</ion-avatar>
-			<h2>MIS PEDIDOS</h2>
-			<p>Consulta tus pedidos activos y completados</p>
+		<button ion-item (click)="openPageLink(shortcut)">
+      <ion-icon name="{{shortcut.icon}}" item-start></ion-icon>
+			<h2>{{shortcut.title | translate}}</h2>
+			<p>{{shortcut.description | translate}}</p>
 		</button>
 	</ion-list>
 	</ion-card>
 
-	<ion-card>
+	<!--<ion-card>
 	<ion-list>
 		<button ion-item (click)="openPage(2)">
 			<ion-avatar item-start>
@@ -71,7 +69,6 @@
 	<ion-card>
 	<ion-list>
 		<button ion-item (click)="openPage(4)">
-			<!--<ion-icon name="map" color="secondary" item-start></ion-icon>-->
       <ion-avatar item-start>
 				<img src="assets/img/appicon.png">
 			</ion-avatar>
@@ -91,7 +88,7 @@
 			<p>Modifica los ajustes de la aplicación</p>
 		</button>
 	</ion-list>
-	</ion-card>
+</ion-card>-->
     <!--<div id="posts">
       <ion-card *ngFor="let post of posts">
         <ion-item>

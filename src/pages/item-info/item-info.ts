@@ -55,4 +55,8 @@ export class ItemInfoPage extends ProtectedPage {
     }
   }
 
+  generateThumbnail(image: any) {
+    return this.configService.baseUrl() + '/image.php/' + image + '?width=300&height=200&cropratio=3:2&image=' + image;
+  }
+
 }

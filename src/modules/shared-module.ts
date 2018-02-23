@@ -4,7 +4,6 @@ import { SafeHtmlPipe } from "../pipes/safehtml.pipe";
 import { SortByPipe } from "../pipes/sort-by/sort-by";
 import { SortDescByPipe } from "../pipes/sort-desc-by/sort-desc-by";
 import { SignaturePadModule } from 'angular2-signaturepad';
-import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
@@ -14,16 +13,14 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     SortDescByPipe
   ],
   imports: [
-    SignaturePadModule,
-    ImageCropperModule
+    SignaturePadModule
   ],
   exports: [
     TextAvatarDirective,
     SafeHtmlPipe,
     SortByPipe,
     SortDescByPipe,
-    SignaturePadModule,
-    ImageCropperModule
+    SignaturePadModule
   ]
 })
 export class SharedModule { }
