@@ -189,7 +189,7 @@ export class MyApp {
   openLink(page) {
     page = this.configExtensionPage(page);
 
-    if (page.method && page.method === 'logout') {
+    if (page.method && page.method === 'logout' && this.configService.cfg.extensions.users.active) {
       this.loading = this.loadingCtrl.create({
         content: 'Cerrando sesión...'
       });
