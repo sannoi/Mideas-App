@@ -55,6 +55,6 @@ export class WelcomePage extends PublicPage {
   }
 
   enter() {
-    this.navCtrl.push(this.configService.cfg.home_logged);
+    this.navCtrl.setRoot(this.configService.cfg.home_logged);
   }
 }

@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar *ngIf="item">
+    <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title *ngIf="options.show_title">{{ item.titulo_formateado }}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content no-padding *ngIf="item">
+<img *ngIf="options.show_image" [src]="item.imagenes.lg" width="100%" height="auto">
+<div *ngIf="options.show_description" padding class="item-content" [innerHtml]="item.contenido_formateado"></div>
+<div *ngIf="options.show_gallery && item.parametros.galeria" padding class="item-gallery">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-4 *ngFor="let image of item.parametros.galeria">
+        <img [src]="baseUrl(image.img)">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
+</ion-content>

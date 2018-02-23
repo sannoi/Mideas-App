@@ -15,12 +15,18 @@
   <ion-list *ngIf="dataLoaded">
     <ion-item-sliding *ngFor="let item of items">
       <button ion-item (click)="itemInfo(item)">
-    <text-avatar [text]="item.titulo_formateado" item-left></text-avatar>
-    <ion-note float-right>
+    <text-avatar *ngIf="listOptions.show_image && listOptions.image_type == 'text_avatar'" [text]="item.titulo_formateado" item-left></text-avatar>
+    <ion-avatar *ngIf="listOptions.show_image && listOptions.image_type == 'avatar'" item-left>
+      <img [src]="item.imagenes.md">
+    </ion-avatar>
+    <ion-thumbnail *ngIf="listOptions.show_image && listOptions.image_type == 'thumbnail'" item-left>
+      <img [src]="item.imagenes.md">
+    </ion-thumbnail>
+    <ion-note float-right *ngIf="listOptions.show_date">
       <small>{{parseTwitterDate(item.fecha)}}</small>
     </ion-note>
-    <h2>{{item.titulo_formateado}}</h2>
-    <p>{{removeHTMLTags(item.contenido_formateado)}}<p>
+    <h2 *ngIf="listOptions.show_title">{{item.titulo_formateado}}</h2>
+    <p *ngIf="listOptions.show_description">{{removeHTMLTags(item.contenido_formateado)}}<p>
         </button>
     </ion-item-sliding>
     <ion-item *ngIf="!items || items.length <= 0">
@@ -31,4 +37,8 @@
       </ion-card>
     </ion-item>
   </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="page < totalPages">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más resultados..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

@@ -7,6 +7,24 @@ export let menu = {
     { title: 'page.map', icon: 'map', component: 'MapPage', nav_params: { pageTitle: 'page.map' } },
     { title: 'page.settings', icon: 'cog', component: 'SettingsListPage', nav_params: { pageTitle: 'page.settings' } },
     { title: 'page.logout', icon: 'exit', component: 'WelcomePage', method: 'logout' },
-    { title: 'Artículos', icon: 'chatboxes', extension: 'articles', type: 'list', nav_params: { pageTitle: 'Artículos' } }
+    {
+      title: 'Blog', icon: 'chatboxes', extension: 'articles', type: 'list', nav_params: {
+        pageTitle: 'Artículos',
+        category: 2,
+        order: 'fecha',
+        orderDir: 'DESC',
+        listOptions: { show_title: true, show_image: true, image_type: 'thumbnail', show_description: true, show_date: true },
+        detailOptions: { show_title: true, show_image: true, show_description: true, show_gallery: true }
+      }
+    },
+    {
+      title: 'Multimedia', icon: 'chatboxes', extension: 'articles', type: 'list', nav_params: {
+        pageTitle: 'Multimedia',
+        category: 3,
+        order: 'titulo',
+        orderDir: 'ASC',
+        detailOptions: { show_title: true, show_image: true, show_description: true, show_gallery: true }
+      }
+    }
   ]
 };

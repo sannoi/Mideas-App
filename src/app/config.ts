@@ -7,6 +7,14 @@ export let cfg = {
   home_logged: 'ProfilePage',
   sites: [
     {
+      name: 'Vagos Permanentes',
+      baseUrl: 'https://www.vagospermanentes.com',
+      apiUrl: 'https://www.vagospermanentes.com/api',
+      color: 'rgb(67, 167, 255)',
+      logo: 'assets/img/booboo_ico.png',
+      theme: 'blue-theme'
+    },
+    {
       name: 'Last Mile',
       baseUrl: 'https://lastmile.mideas.es',
       apiUrl: 'https://lastmile.mideas.es/api',
@@ -25,7 +33,7 @@ export let cfg = {
   ],
   extensions: {
     users: {
-      active: true,
+      active: false,
       provider: 'usersService',
       list: {
         use: true,
@@ -52,7 +60,7 @@ export let cfg = {
       provider: 'itemsService',
       list: {
         use: true,
-        max_items: 10,
+        max_items: 20,
         component: 'ListPage'
       },
       item_detail: {
