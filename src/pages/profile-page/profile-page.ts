@@ -12,8 +12,6 @@ import { ConfigServiceProvider } from '../../providers/config-service/config-ser
 })
 export class ProfilePage extends ProtectedPage {
 
-  public following: boolean = false;
-
   public user: any;
 
   constructor(public navCtrl: NavController,
@@ -33,6 +31,14 @@ export class ProfilePage extends ProtectedPage {
     });
   }
 
+  cssClass() {
+    if (this.configService.cfg.extensions.users.active) {
+      return '';
+    } else {
+      return 'not_logged';
+    }
+  }
+
   openPageLink(page: any) {
     if (page) {
       this.configService.setActivePage(page);
@@ -43,11 +49,6 @@ export class ProfilePage extends ProtectedPage {
     if (this.configService.menu.pages[id_menu]) {
       this.configService.setActivePage(this.configService.menu.pages[id_menu]);
     }
-  }
-
-  follow() {
-    this.following = !this.following;
-    console.log('Follow user clicked');
   }
 
   imageTapped(post) {

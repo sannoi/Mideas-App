@@ -2,12 +2,14 @@ page-profile-page {
   ion-content {
     background: linear-gradient(0deg, #eeeef1 0%, white 80%, white 100%);
   }
-  button,
-  ion-button,
+
+  .button-ios,
   .button-md,
-  .button-ios {
+  button,
+  ion-button {
     text-transform: none !important;
   }
+
   p {
     color: #444;
   }
@@ -30,14 +32,26 @@ page-profile-page {
     padding-top: 200px;
     text-align: center;
   }
+
+  #content.not_logged {
+    padding-top: 0;
+  }
+
   #profile-image {
     display: block;
     border-radius: 50%;
     width: auto;
     height: 100px;
-    margin: 0 auto 0;
-    box-shadow: 0px 11px 20px -3px rgba(142, 136, 146, 0.75);
+    margin: 0 auto;
+    box-shadow: 0 11px 20px -3px rgba(142, 136, 146, 0.75);
   }
+
+  #content.not_logged #profile-image {
+    background-color: white;
+    box-shadow: none;
+    border: 2px solid black;
+  }
+
   #profile-info {
     position: absolute;
     top: -95px;
@@ -45,17 +59,29 @@ page-profile-page {
     z-index: 2;
     text-align: center;
   }
+
+  #content.not_logged #profile-info {
+    position: absolute;
+    top: -150px;
+    width: 100%;
+    z-index: 2;
+    text-align: center;
+  }
+
   #profile-name {
     color: #444;
     font-size: 26px;
   }
+
   .profile-description {
     font-size: 15px;
     color: #888;
   }
+
   .follow-button {
     text-transform: none;
     border-radius: 3px !important;
+
     ion-icon {
       font-weight: bold;
       padding-left: 5px;
@@ -69,12 +95,14 @@ page-profile-page {
       font-size: medium;
       margin-bottom: 3px;
     }
+
     span {
       font-weight: bold;
       font-size: 2.4rem;
       color: #34354c;
     }
   }
+
   hr {
     border: 0;
     height: 1px;

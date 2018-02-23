@@ -1,0 +1,60 @@
+.red-theme {
+  ion-content {
+    background-color: #fff;
+  }
+
+  .toolbar-background-md {
+    background-color: rgb(255, 0, 0);
+    color: #fff;
+  }
+
+  .fab-md-primary {
+    color: #fff;
+    background-color: rgb(255, 0, 0);
+  }
+
+  .badge-md {
+    border-radius: 4px;
+    color: #fff;
+    background-color: rgb(255, 0, 0);
+  }
+
+  .text-md-primary {
+    color: rgb(255, 0, 0);
+  }
+
+  .button-clear-md {
+    color: rgb(255, 0, 0);
+  }
+
+  page-message-info .chat-bubble.right {
+    background-color: rgb(255, 0, 0);
+    color: #fff;
+  }
+
+  page-message-info .chat-bubble.right:before {
+    background-color: rgb(255, 0, 0);
+    right: 10px;
+    -webkit-transform: rotate(118deg) skew(-5deg);
+}
+
+  .toolbar-title-md {
+    color: #fff;
+  }
+
+  .bar-button-clear-md-default,
+  .bar-button-default-md,
+  .bar-button-md-default {
+    color: #fff;
+  }
+
+  .gradient {
+    background: #81aaf9;
+    background: -webkit-linear-gradient(-54deg, #ff0000 20%, #d90000 90%);
+    background: -o-linear-gradient(-54deg, #ff0000 20%, #d90000 90%);
+    background: -moz-linear-gradient(-54deg, #ff0000 20%, #d90000 90%);
+    background: linear-gradient(-54deg, rgba(255, 0, 0, 0.58) 20%, #d90000 90%);
+    position: relative;
+    overflow: hidden;
+  }
+}

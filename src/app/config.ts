@@ -1,18 +1,22 @@
 export let cfg = {
+  appType: 'menu',
   configUrl: '/sistema/general/config.json',
   home_not_logged: 'WelcomePage',
   home_logged: 'ProfilePage',
+  localDBName: '__mideasApp',
   sites: [
     {
       name: 'Vagos Permanentes',
-      baseUrl: 'https://www.vagospermanentes.com',
-      apiUrl: 'https://www.vagospermanentes.com/api',
-      color: 'rgb(67, 167, 255)',
-      logo: 'assets/img/booboo_ico.png',
-      theme: 'blue-theme'
+      slogan: 'Ska Punk Metal',
+      baseUrl: 'http://web.vagospermanentes.com',
+      apiUrl: 'http://web.vagospermanentes.com/api',
+      color: 'rgb(255, 0, 0)',
+      logo: 'assets/img/vp_logo.png',
+      theme: 'red-theme'
     },
     {
       name: 'Last Mile',
+      slogan: 'Tu red de transportes integral',
       baseUrl: 'https://lastmile.mideas.es',
       apiUrl: 'https://lastmile.mideas.es/api',
       color: 'rgb(67, 167, 255)',
@@ -21,6 +25,7 @@ export let cfg = {
     },
     {
       name: 'Red de Optimización',
+      slogan: 'Tu empresa de transportes integral',
       baseUrl: 'https://www.booboo.eu',
       apiUrl: 'https://www.booboo.eu/api',
       color: 'rgb(255, 139, 187)',

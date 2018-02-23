@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, AlertController, LoadingController } from 'ionic-angular';
+import { Nav, Platform, AlertController, LoadingController, Tabs } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
@@ -17,6 +17,7 @@ import { ItemsServiceProvider } from '../providers/items-service/items-service';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
+  @ViewChild('myTabs') tabRef: Tabs;
   rootPage: any = 'WelcomePage';
   pages: Array<{ title: string, icon?: string, component: any, method?: any }>;
   selectedTheme: string;
@@ -39,6 +40,8 @@ export class MyApp {
     public usersService: UsersService,
     public notificationsService: NotificationsServiceProvider,
     public itemsService: ItemsServiceProvider) {
+    translate.setDefaultLang('es');
+
     this.authService.getUsrAsObservable().subscribe(val => {
       this.selectedUser = val;
       if (val) {
@@ -57,8 +60,6 @@ export class MyApp {
     this.notificationsService.getActiveNotification().subscribe(val => this.redirectPush(val));
 
     this.initializeApp();
-
-    translate.setDefaultLang('es');
   }
 
   initializeApp() {
@@ -86,7 +87,7 @@ export class MyApp {
   initializeExtensions() {
     let extensions = this.configService.cfg.extensions;
     let extensionsKeys = Object.keys(extensions);
-    for (var i = 0; i < extensionsKeys.length; i++){
+    for (var i = 0; i < extensionsKeys.length; i++) {
       var eKey = extensionsKeys[i];
       var extension = extensions[eKey];
       if (extension && extension.active) {
@@ -107,7 +108,7 @@ export class MyApp {
         dataSettings.buttons = [];
         for (var i = 0; i < data.modal_buttons.length; i++) {
           if (data.modal_buttons[i].role && data.modal_buttons[i].role == 'cancel') {
-            let btn = { text: data.modal_buttons[i].text, role: 'cancel', handler: () => {} };
+            let btn = { text: data.modal_buttons[i].text, role: 'cancel', handler: () => { } };
             dataSettings.buttons.push(btn);
           } else if (data.modal_buttons[i].navToMenuLink) {
             let link = this.configService.menu.pages[data.modal_buttons[i].navToMenuLink];
@@ -122,9 +123,9 @@ export class MyApp {
   }
 
   redirectPush(data: any) {
-    if (this.configService.cfg.extensions.notifications.active && data){
+    if (this.configService.cfg.extensions.notifications.active && data) {
       if (data.wasTapped) {
-        let msgPage = { title: 'page.messages', icon: 'chatboxes', extension: 'messages', type: 'list', nav_params: { pageTitle: 'page.messages', pageType: 'all', autoOpenItem: data.msg_parent_id }  };
+        let msgPage = { title: 'page.messages', icon: 'chatboxes', extension: 'messages', type: 'list', nav_params: { pageTitle: 'page.messages', pageType: 'all', autoOpenItem: data.msg_parent_id } };
         this.configService.setActivePage(msgPage);
       } else {
         let view = this.nav.getActive();
@@ -133,7 +134,7 @@ export class MyApp {
             this.nav.remove(1);
           });
         } else if (view.component.name == "MessagesPage") {
-          let msgs = { title: 'page.messages', icon: 'chatboxes', extension: 'messages', type: 'list', nav_params: { pageTitle: 'page.messages', pageType: 'all' }  };
+          let msgs = { title: 'page.messages', icon: 'chatboxes', extension: 'messages', type: 'list', nav_params: { pageTitle: 'page.messages', pageType: 'all' } };
           this.configService.setActivePage(msgs);
         } else {
           this.alert = this.alertCtrl.create({
@@ -149,7 +150,7 @@ export class MyApp {
               {
                 text: 'Sí',
                 handler: () => {
-                  let msgPage = { title: 'page.messages', icon: 'chatboxes', extension: 'messages', type: 'list', nav_params: { pageTitle: 'page.messages', pageType: 'all', autoOpenItem: data.msg_parent_id }  };
+                  let msgPage = { title: 'page.messages', icon: 'chatboxes', extension: 'messages', type: 'list', nav_params: { pageTitle: 'page.messages', pageType: 'all', autoOpenItem: data.msg_parent_id } };
                   this.configService.setActivePage(msgPage);
                 }
               }
@@ -164,11 +165,21 @@ export class MyApp {
   public configPages() {
     let uType = this.authService.userType;
     let pages = this.configService.menu.pages;
-    pages = pages.filter(function(x){
+    pages = pages.filter(function(x) {
       return (!x.require_user_type || x.require_user_type == uType);
     });
 
     this.pages = pages;
+  }
+
+  tabRoot(page) {
+    page = this.configExtensionPage(page);
+    return page.component;
+  }
+
+  tabParams(page) {
+    page = this.configExtensionPage(page);
+    return page.nav_params;
   }
 
   openPage(page) {
@@ -184,18 +195,28 @@ export class MyApp {
       });
       this.loading.present();
       this.authService.logout().then(result => {
-        this.loading.dismiss();
-        this.nav.setRoot(page.component, page.nav_params);
+        this.loading.dismiss
+        if (this.configService.cfg.appType == 'menu') {
+          this.nav.setRoot(page.component, page.nav_params);
+        } else {
+          //this.tabRef.push(page.component, page.nav_params);
+          this.nav.push(page.component, page.nav_params);
+        }
       });
     } else {
-      this.nav.setRoot(page.component, page.nav_params);
+      if (this.configService.cfg.appType == 'menu') {
+        this.nav.setRoot(page.component, page.nav_params);
+      } else {
+        //this.tabRef.push(page.component, page.nav_params);
+        this.nav.push(page.component, page.nav_params);
+      }
     }
   }
 
   configExtensionPage(page: any) {
     if (page.extension && page.type && !page.component) {
       let extension = this.configService.cfg.extensions[page.extension];
-      if (extension && extension.active && extension[page.type] && extension[page.type]['use'] && extension[page.type]['component']){
+      if (extension && extension.active && extension[page.type] && extension[page.type]['use'] && extension[page.type]['component']) {
         page.component = extension[page.type]['component'];
       }
       page.nav_params.extension = extension;

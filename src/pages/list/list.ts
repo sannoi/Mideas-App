@@ -16,6 +16,7 @@ export class ListPage extends ProtectedPage {
   public order: any;
   public orderDir: any;
   public category: any;
+  public onlyFromActiveUser: any;
   public page: any;
   public totalPages: any;
   public totalItems: any;
@@ -77,6 +78,7 @@ export class ListPage extends ProtectedPage {
     this.order = navParams.get('order');
     this.orderDir = navParams.get('orderDir');
     this.category = navParams.get('category');
+    this.onlyFromActiveUser = navParams.get('onlyFromActiveUser');
 
     this.loadItems();
   }
@@ -92,7 +94,7 @@ export class ListPage extends ProtectedPage {
         this.autoOpenItem = null;
       }
       this[this.extension.provider].initialize(this.extension).then(res => {
-        this[this.extension.provider].getAll(this.page, this.order, this.orderDir, this.category).then((result) => {
+        this[this.extension.provider].getAll(this.page, this.order, this.orderDir, this.category, this.onlyFromActiveUser).then((result) => {
           this.totalItems = result.total_resultados;
           this.totalPages = result.total_paginas;
           let newItems = [];
@@ -122,7 +124,7 @@ export class ListPage extends ProtectedPage {
     this.page = this.page + 1;
     setTimeout(() => {
       this[this.extension.provider].initialize(this.extension).then(res => {
-        this[this.extension.provider].getAll(this.page, this.order, this.orderDir, this.category).then((result) => {
+        this[this.extension.provider].getAll(this.page, this.order, this.orderDir, this.category, this.onlyFromActiveUser).then((result) => {
           this.totalItems = result.total_resultados;
           this.totalPages = result.total_paginas;
           for (let i = 0; i < result.resultados.length; i++) {
@@ -146,7 +148,6 @@ export class ListPage extends ProtectedPage {
         });
         item.parametros.galeria = galeria;
       }
-      console.log(item.parametros);
     }
     return item;
   }

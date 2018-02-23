@@ -1,6 +1,7 @@
-<ion-split-pane [class]="selectedTheme">
+<div [class]="selectedTheme">
+<ion-split-pane>
 
-<ion-menu [content]="content">
+<ion-menu [content]="content" *ngIf="configService.cfg.appType == 'menu' || configService.cfg.appType == 'menu&tabs'">
   <ion-header>
     <ion-toolbar>
       <ion-title>Меnu</ion-title>
@@ -21,3 +22,8 @@
 <ion-nav [root]="rootPage" main #content swipeBackEnabled="false"></ion-nav>
 
 </ion-split-pane>
+
+<ion-tabs *ngIf="configService.cfg.appType == 'tabs' || configService.cfg.appType == 'menu&tabs'" color="dark" #myTabs>
+  <ion-tab *ngFor="let tab of configService.tabs" tabIcon="{{tab.icon}}" tabTitle="{{ tab.title }}" [root]="tabRoot(tab)" [rootParams]="tabParams(tab)"></ion-tab>
+</ion-tabs>
+</div>

@@ -28,9 +28,10 @@ import { MessagesServiceProvider } from '../providers/messages-service/messages-
 import { ConfigServiceProvider } from '../providers/config-service/config-service';
 import { NotificationsServiceProvider } from '../providers/notifications-service/notifications-service';
 import { ItemsServiceProvider } from '../providers/items-service/items-service';
+import * as AppCfg from './config';
 
 let storage = new Storage({
-  name: '__boobooApp'
+  name: AppCfg.cfg.localDBName
 });
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -52,7 +53,7 @@ export function createTranslateLoader(http: Http) {
     BrowserModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot({
-      name: '__boobooApp'
+      name: AppCfg.cfg.localDBName
     }),
     HttpModule,
     SharedModule,

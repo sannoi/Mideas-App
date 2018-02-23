@@ -28,7 +28,7 @@ export class ItemsServiceProvider {
     });
   }
 
-  getAll(page?: any, order?: any, orderDir?: any, category?: any) {
+  getAll(page?: any, order?: any, orderDir?: any, category?: any, onlyFromActiveUser?: any) {
     if (!page) {
       page = 1;
     }
@@ -38,7 +38,10 @@ export class ItemsServiceProvider {
     if (!orderDir) {
       orderDir = 'DESC';
     }
-    var _def = 'q=&orden='+order+'&ordenDir='+orderDir+'&page='+page+'&resultados='+this.config.max_items+'&categoria='+category;
+    if (!onlyFromActiveUser) {
+      onlyFromActiveUser = 0;
+    }
+    var _def = 'q=&orden='+order+'&ordenDir='+orderDir+'&page='+page+'&resultados='+this.config.max_items+'&categoria='+category+'&solo_usuario_activo='+onlyFromActiveUser;
     return this.authHttp.get(this.configService.apiUrl() + this.extension.endpoints.list + '/?' + _def)
       .toPromise()
       .then(rs => {
