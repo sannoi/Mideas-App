@@ -28,7 +28,7 @@ export class OrderNotesPage extends ProtectedPage {
     public ordersService: OrdersService,
     public configService: ConfigServiceProvider) {
 
-    super(navCtrl, navParams, storage, authService);
+    super(navCtrl, navParams, storage, authService, configService);
 
     this.order = navParams.get('order');
 

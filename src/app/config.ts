@@ -3,6 +3,8 @@ export let cfg = {
   apiUrl: 'https://lastmile.mideas.es/api',
   configUrl: '/sistema/general/config.json',
   tokenName: 'token',
+  home_not_logged: 'WelcomePage',
+  home_logged: 'ProfilePage',
   sites: [
     {
       name: 'Last Mile',
@@ -31,6 +33,35 @@ export let cfg = {
       },
       item_detail: {
         use: false
+      },
+      endpoints: {
+        register: '/apps/Mideas/register.json',
+        login: '/apps/Mideas/login.json',
+        logout: '/apps/Mideas/logout.json',
+        formToken: '/apps/Mideas/formToken.json',
+        refresh: '/apps/Mideas/login.json',
+        list: '/usuarios/usuario/buscar.json',
+        info: '/usuarios/usuario/##ID##/info.json',
+        geolocation: '/usuarios/usuario/saveGeolocation.json',
+        save_firebase_token: '/usuarios/usuario/saveFirebaseToken.json',
+        clear_firebase_token: '/usuarios/usuario/clearFirebaseToken.json'
+      }
+    },
+    articles: {
+      active: true,
+      provider: 'itemsService',
+      list: {
+        use: true,
+        max_items: 10,
+        component: 'ListPage'
+      },
+      item_detail: {
+        use: true,
+        component: 'ItemInfoPage'
+      },
+      endpoints: {
+        list: '/articulos/articulo/buscar.json',
+        info: '/articulos/articulo/##ID##/info.json'
       }
     },
     messages: {
@@ -38,11 +69,40 @@ export let cfg = {
       provider: 'messagesService',
       list: {
         use: true,
+        max_items: 10,
         component: 'MessagesPage'
       },
       item_detail: {
         use: true,
         component: 'MessagesInfoPage'
+      },
+      endpoints: {
+        list: '/mensajes/mensaje/buscar.json',
+        info: '/mensajes/mensaje/##ID##/info.json',
+        response: '/mensajes/mensaje/nuevo.json',
+        readed: '/mensajes/mensaje/mensajeLeido.json',
+        checkNews: '/mensajes/mensaje/nuevosMensajes.json'
+      }
+    },
+    orders: {
+      active: true,
+      provider: 'ordersService',
+      list: {
+        use: true,
+        component: 'ListMasterPage'
+      },
+      item_detail: {
+        use: true,
+        component: 'OrderInfoPage'
+      },
+      endpoints: {
+        list: '/shop/pedido/buscar.json',
+        assign: '/shop/pedido/asociarProveedor.json',
+        pickup: '/shop/pedido/recogerPedidoConductor.json',
+        store: '/shop/pedido/almacenarPedidoConductor.json',
+        complete: '/shop/pedido/completarPedidoConductor.json',
+        add_document: '/shop/pedido/addDocumentOrder.json',
+        info: '/shop/pedido/##ID##/info.json'
       }
     },
     geolocation: {

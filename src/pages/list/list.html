@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+      </button>
+    <ion-title>{{ customTitle | translate }}</ion-title>
+    <!--<ion-buttons end>
+    <button ion-button icon-only (click)="newItem()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-buttons>-->
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list *ngIf="dataLoaded">
+    <ion-item-sliding *ngFor="let item of items">
+      <button ion-item (click)="itemInfo(item)">
+    <text-avatar [text]="item.titulo_formateado" item-left></text-avatar>
+    <ion-note float-right>
+      <small>{{parseTwitterDate(item.fecha)}}</small>
+    </ion-note>
+    <h2>{{item.titulo_formateado}}</h2>
+    <p>{{removeHTMLTags(item.contenido_formateado)}}<p>
+        </button>
+    </ion-item-sliding>
+    <ion-item *ngIf="!items || items.length <= 0">
+      <ion-card>
+        <ion-card-content>
+          <h2 align="center">No hay artículos</h2>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+</ion-content>

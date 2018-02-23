@@ -28,7 +28,7 @@ export class MapPage extends ProtectedPage {
     public authService: AuthService,
     public configService: ConfigServiceProvider,
     public locationService: LocationServiceProvider) {
-    super(navCtrl, navParams, storage, authService);
+    super(navCtrl, navParams, storage, authService, configService);
   }
 
   ionViewDidLoad() {
@@ -54,7 +54,7 @@ export class MapPage extends ProtectedPage {
       maxZoom: 18
     }).addTo(this.map);
 
-    if (!this.realtime) {
+    if (!this.realtime && this.authService.getUsr()) {
       this.realtime = leaflet.realtime({
         url: this.configService.apiUrl() + '/shop/pedido/realtimePedidos.json/?solo_usuario_actual=1&solo_disponibles=0&usuario_id=' + this.authService.getUsr().id,
         crossOrigin: true,
@@ -87,12 +87,12 @@ export class MapPage extends ProtectedPage {
           map1.fitBounds(rt.getBounds());
         }
       });
-    } else {
+    } else if (this.realtime) {
       this.realtime.start();
     }
 
     if (this.configService.cfg.extensions.geolocation.active) {
-      let result = loc.GPSStatus();
+      let result = this.locationService.GPSStatus();
       this.gps = result;
       if (result == true) {
         var redIcon = leaflet.icon({

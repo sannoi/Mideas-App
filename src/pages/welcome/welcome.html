@@ -6,7 +6,8 @@
       {{ 'home.welcome_intro' | translate }}
     </div>
     <div padding>
-      <button ion-button block (click)="login()" >{{ 'page.login' | translate }}</button>
+      <button *ngIf="configService.cfg.extensions.users.active" ion-button block (click)="login()" >{{ 'page.login' | translate }}</button>
+      <button *ngIf="!configService.cfg.extensions.users.active" ion-button block (click)="enter()" >{{ 'page.enter' | translate }}</button>
     </div>
   </div>
 

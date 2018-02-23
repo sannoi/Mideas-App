@@ -15,15 +15,10 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 export class OrderAddDocumentPage extends ProtectedPage {
 
   signature: any;
-
   isDrawing = false;
-
   order: any;
-
   text: any;
-
   documentUrl: any;
-
   customTitle: any;
 
   constructor(
@@ -39,7 +34,7 @@ export class OrderAddDocumentPage extends ProtectedPage {
     public cameraService: CameraService,
     public transfer: FileTransfer,
     public configService: ConfigServiceProvider) {
-    super(navCtrl, navParams, storage, authService);
+    super(navCtrl, navParams, storage, authService, configService);
 
     this.order = navParams.get('order');
 

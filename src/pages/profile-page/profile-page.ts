@@ -23,7 +23,7 @@ export class ProfilePage extends ProtectedPage {
     public storage: Storage,
     public authService: AuthService,
     public configService: ConfigServiceProvider) {
-    super(navCtrl, navParams, storage, authService);
+    super(navCtrl, navParams, storage, authService, configService);
   }
 
   ionViewDidLoad() {

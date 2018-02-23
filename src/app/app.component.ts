@@ -10,23 +10,18 @@ import { UsersService } from '../providers/users-service';
 import { LocationServiceProvider } from '../providers/location-service';
 import { MessagesServiceProvider } from '../providers/messages-service/messages-service';
 import { NotificationsServiceProvider } from '../providers/notifications-service/notifications-service';
+import { ItemsServiceProvider } from '../providers/items-service/items-service';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
   rootPage: any = 'WelcomePage';
-
   pages: Array<{ title: string, icon?: string, component: any, method?: any }>;
-
   selectedTheme: string;
-
   selectedUser: any;
-
   loading: any;
-
   alert: any;
 
   constructor(
@@ -42,7 +37,8 @@ export class MyApp {
     public translate: TranslateService,
     public locationService: LocationServiceProvider,
     public usersService: UsersService,
-    public notificationsService: NotificationsServiceProvider) {
+    public notificationsService: NotificationsServiceProvider,
+    public itemsService: ItemsServiceProvider) {
     this.authService.getUsrAsObservable().subscribe(val => {
       this.selectedUser = val;
       if (val) {
@@ -81,7 +77,6 @@ export class MyApp {
           } else {
             this.initializeExtensions();
           }
-
           this.configPages();
         }
       });
@@ -97,7 +92,7 @@ export class MyApp {
       if (extension && extension.active) {
         var provider = extension.provider;
         if (provider && this[provider]) {
-          this[provider].initialize().then(data => {
+          this[provider].initialize(extension).then(data => {
             this.responseInitExtension(data);
           });
         }
@@ -120,7 +115,6 @@ export class MyApp {
             dataSettings.buttons.push(btn);
           }
         }
-        console.log(dataSettings);
         this.alert = this.alertCtrl.create(dataSettings);
         this.alert.present();
       }
@@ -132,7 +126,6 @@ export class MyApp {
       if (data.wasTapped) {
         let msgPage = { title: 'page.messages', icon: 'chatboxes', extension: 'messages', type: 'list', nav_params: { pageTitle: 'page.messages', pageType: 'all', autoOpenItem: data.msg_parent_id }  };
         this.configService.setActivePage(msgPage);
-        //this.openPage(msgPage);
       } else {
         let view = this.nav.getActive();
         if (view.component.name == "MessageInfoPage" && view.data.message.id == data.msg_parent_id) {
@@ -142,7 +135,6 @@ export class MyApp {
         } else if (view.component.name == "MessagesPage") {
           let msgs = { title: 'page.messages', icon: 'chatboxes', extension: 'messages', type: 'list', nav_params: { pageTitle: 'page.messages', pageType: 'all' }  };
           this.configService.setActivePage(msgs);
-          //this.openPage(msgs);
         } else {
           this.alert = this.alertCtrl.create({
             enableBackdropDismiss: false,
@@ -159,7 +151,6 @@ export class MyApp {
                 handler: () => {
                   let msgPage = { title: 'page.messages', icon: 'chatboxes', extension: 'messages', type: 'list', nav_params: { pageTitle: 'page.messages', pageType: 'all', autoOpenItem: data.msg_parent_id }  };
                   this.configService.setActivePage(msgPage);
-                  //this.openPage(msgPage);
                 }
               }
             ]

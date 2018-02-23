@@ -25,6 +25,7 @@
   },
   "page": {
     "login": "Accede con tus datos",
+    "enter": "Entrar",
     "logout": "Salir",
     "register": "Nuevo registro",
     "forgotten_password": "Recuperar contraseña",

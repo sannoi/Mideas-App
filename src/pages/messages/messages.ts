@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 import { AuthService } from '../../providers/auth-service';
 import { MessagesServiceProvider } from '../../providers/messages-service/messages-service';
 import { MessageModel } from '../../models/message.model';
+import { ConfigServiceProvider } from '../../providers/config-service/config-service';
 
 @IonicPage()
 @Component({
@@ -33,8 +34,9 @@ export class MessagesPage extends ProtectedPage {
     public modalCtrl: ModalController,
     public storage: Storage,
     public authService: AuthService,
-    public messagesService: MessagesServiceProvider) {
-    super(navCtrl, navParams, storage, authService);
+    public messagesService: MessagesServiceProvider,
+    public configService: ConfigServiceProvider) {
+    super(navCtrl, navParams, storage, authService, configService);
 
     this.dataLoaded = false;
 

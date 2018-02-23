@@ -20,7 +20,7 @@ export class WelcomePage extends PublicPage {
     public modalCtrl: ModalController,
     public loadingCtrl: LoadingController,
     public configService: ConfigServiceProvider) {
-    super(navCtrl, navParams, storage);
+    super(navCtrl, navParams, storage, configService);
   }
 
   ionViewDidLoad() {
@@ -54,7 +54,7 @@ export class WelcomePage extends PublicPage {
     });
   }
 
-  signup() {
-    this.navCtrl.push('SignupPage');
+  enter() {
+    this.navCtrl.push(this.configService.cfg.home_logged);
   }
 }

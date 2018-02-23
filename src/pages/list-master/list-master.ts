@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, MenuController, NavParams, LoadingController } from 'ionic-angular';
-import {ProtectedPage} from '../protected-page/protected-page';
-import {Storage} from '@ionic/storage';
-import {AuthService} from '../../providers/auth-service';
-import {OrdersService} from '../../providers/orders-service';
-import {OrderModel} from '../../models/order.model';
+import { ProtectedPage } from '../protected-page/protected-page';
+import { Storage } from '@ionic/storage';
+import { AuthService } from '../../providers/auth-service';
+import { OrdersService } from '../../providers/orders-service';
+import { OrderModel } from '../../models/order.model';
+import { ConfigServiceProvider } from '../../providers/config-service/config-service';
 
 @IonicPage()
 @Component({
@@ -13,13 +14,13 @@ import {OrderModel} from '../../models/order.model';
 })
 export class ListMasterPage extends ProtectedPage {
 
-    public orders: any;
+  public orders: any;
 
-    private onlyNotAssigned: boolean;
+  private onlyNotAssigned: boolean;
 
-    public customTitle: string;
+  public customTitle: string;
 
-	public loading: any;
+  public loading: any;
 
   public dataLoaded: boolean = false;
 
@@ -27,32 +28,32 @@ export class ListMasterPage extends ProtectedPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public menuCtrl: MenuController,
-	public loadingCtr: LoadingController,
+    public loadingCtr: LoadingController,
     public storage: Storage,
-	public authService: AuthService,
-    public ordersService: OrdersService) {
+    public authService: AuthService,
+    public ordersService: OrdersService,
+    public configService: ConfigServiceProvider) {
+    super(navCtrl, navParams, storage, authService, configService);
 
-      super(navCtrl, navParams, storage, authService);
+    this.dataLoaded = false;
 
-      this.dataLoaded = false;
+    this.onlyNotAssigned = navParams.get('onlyNotAssigned');
 
-      this.onlyNotAssigned = navParams.get('onlyNotAssigned');
+    this.customTitle = navParams.get('pageTitle');
 
-      this.customTitle = navParams.get('pageTitle');
-
-      this.loadOrders();
+    this.loadOrders();
   }
 
   loadOrders() {
     /*this.loading = this.loadingCtr.create({content: "Cargando pedidos..."});
 
 	  this.loading.present().then(() => {*/
-		  this.ordersService.getAll(this.onlyNotAssigned).then((orders) => {
-			this.orders = orders;
-			//this.loading.dismiss();
+    this.ordersService.getAll(this.onlyNotAssigned).then((orders) => {
+      this.orders = orders;
+      //this.loading.dismiss();
       this.dataLoaded = true;
-		  });
-	  //});
+    });
+    //});
   }
 
   ionViewWillEnter() {
@@ -66,10 +67,10 @@ export class ListMasterPage extends ProtectedPage {
   }
 
   numOrders() {
-	  return this.orders.length;
+    return this.orders.length;
   }
 
   orderInfo(order: OrderModel) {
-    this.navCtrl.push('OrderInfoPage', {order: order});
+    this.navCtrl.push('OrderInfoPage', { order: order });
   }
 }

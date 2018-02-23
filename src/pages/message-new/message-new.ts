@@ -4,6 +4,7 @@ import {ProtectedPage} from '../protected-page/protected-page';
 import {Storage} from '@ionic/storage';
 import {AuthService} from '../../providers/auth-service';
 import {MessagesServiceProvider} from '../../providers/messages-service/messages-service';
+import { ConfigServiceProvider } from '../../providers/config-service/config-service';
 
 @IonicPage()
 @Component({
@@ -11,17 +12,11 @@ import {MessagesServiceProvider} from '../../providers/messages-service/messages
   templateUrl: 'message-new.html',
 })
 export class MessageNewPage extends ProtectedPage {
-
   @ViewChild(Content) contenido: Content;
-
   public destinatario: any;
-
   public customTitle: string;
-
   content: any;
-
   loading: any;
-
   message: any;
 
   constructor(public navCtrl: NavController,
@@ -32,8 +27,9 @@ export class MessageNewPage extends ProtectedPage {
 	  public loadingCtr: LoadingController,
     public storage: Storage,
 	  public authService: AuthService,
-    public messagesService: MessagesServiceProvider) {
-      super(navCtrl, navParams, storage, authService);
+    public messagesService: MessagesServiceProvider,
+    public configService: ConfigServiceProvider) {
+      super(navCtrl, navParams, storage, authService, configService);
 
       this.customTitle = navParams.get('pageTitle');
 

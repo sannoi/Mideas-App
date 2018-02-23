@@ -37,7 +37,7 @@ export class DriversPage extends ProtectedPage {
     public usersService: UsersService,
     public configService: ConfigServiceProvider) {
 
-    super(navCtrl, navParams, storage, authService);
+    super(navCtrl, navParams, storage, authService, configService);
 
     this.dataLoaded = false;
 

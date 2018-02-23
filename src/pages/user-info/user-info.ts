@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angul
 import { ProtectedPage } from '../protected-page/protected-page';
 import { Storage } from '@ionic/storage';
 import { AuthService } from '../../providers/auth-service';
+import { ConfigServiceProvider } from '../../providers/config-service/config-service';
 
 @IonicPage()
 @Component({
@@ -17,14 +18,11 @@ export class UserInfoPage extends ProtectedPage {
     public navParams: NavParams,
     public menuCtrl: MenuController,
     public storage: Storage,
-    public authService: AuthService) {
-
-    super(navCtrl, navParams, storage, authService);
+    public authService: AuthService,
+    public configService: ConfigServiceProvider) {
+    super(navCtrl, navParams, storage, authService, configService);
 
     this.usr = navParams.get('user');
-
-    console.log(this.usr);
-
   }
 
   ionViewDidLoad() {

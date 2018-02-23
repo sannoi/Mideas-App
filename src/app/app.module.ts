@@ -27,6 +27,7 @@ import { LocationServiceProvider } from '../providers/location-service';
 import { MessagesServiceProvider } from '../providers/messages-service/messages-service';
 import { ConfigServiceProvider } from '../providers/config-service/config-service';
 import { NotificationsServiceProvider } from '../providers/notifications-service/notifications-service';
+import { ItemsServiceProvider } from '../providers/items-service/items-service';
 
 let storage = new Storage({
   name: '__boobooApp'
@@ -90,7 +91,8 @@ export function createTranslateLoader(http: Http) {
     FileTransfer,
     FCM,
     ConfigServiceProvider,
-    NotificationsServiceProvider
+    NotificationsServiceProvider,
+    ItemsServiceProvider
   ]
 })
 export class AppModule { }

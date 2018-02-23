@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, MenuController} from 'ionic-angular';
-import {ProtectedPage} from '../protected-page/protected-page';
-import {Storage} from '@ionic/storage';
-import {AuthService} from '../../providers/auth-service';
-import {LocationServiceProvider} from '../../providers/location-service';
-import {NotificationsServiceProvider} from '../../providers/notifications-service/notifications-service';
-import {ConfigServiceProvider} from '../../providers/config-service/config-service';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { ProtectedPage } from '../protected-page/protected-page';
+import { Storage } from '@ionic/storage';
+import { AuthService } from '../../providers/auth-service';
+import { LocationServiceProvider } from '../../providers/location-service';
+import { NotificationsServiceProvider } from '../../providers/notifications-service/notifications-service';
+import { ConfigServiceProvider } from '../../providers/config-service/config-service';
 
 @IonicPage()
 @Component({
@@ -13,18 +13,18 @@ import {ConfigServiceProvider} from '../../providers/config-service/config-servi
   templateUrl: 'settings.html'
 })
 export class SettingsListPage extends ProtectedPage {
-	gps: any;
+  gps: any;
   notifications: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public menuCtrl: MenuController,
     public storage: Storage,
-	public authService: AuthService,
-	public locationService: LocationServiceProvider,
-  public notificationsService: NotificationsServiceProvider,
-  public configService: ConfigServiceProvider) {
-	  super(navCtrl, navParams, storage, authService);
+    public authService: AuthService,
+    public locationService: LocationServiceProvider,
+    public notificationsService: NotificationsServiceProvider,
+    public configService: ConfigServiceProvider) {
+    super(navCtrl, navParams, storage, authService, configService);
   }
 
   ionViewDidLoad() {

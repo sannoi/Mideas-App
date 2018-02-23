@@ -45,7 +45,7 @@ export class OrderInfoPage extends ProtectedPage {
     public usersService: UsersService,
     public locationService: LocationServiceProvider,
     public configService: ConfigServiceProvider) {
-    super(navCtrl, navParams, storage, authService);
+    super(navCtrl, navParams, storage, authService, configService);
     this.order = navParams.get('order');
   }
 
@@ -143,7 +143,7 @@ export class OrderInfoPage extends ProtectedPage {
   canPickupOrder(order: OrderModel) {
     let cfg = this.configService.remoteCfg;
 
-    if (this.isOrderDriver(order) && order.tipo == 'estandar' && (order.estado == cfg.opciones.ext_shop.venta.estado_asociado || order.estado == cfg.opciones.ext_shop.venta.estado_en_espera)) {
+    if (/*this.isOrderDriver(order) && */order.tipo == 'estandar' && (order.estado == cfg.opciones.ext_shop.venta.estado_asociado || order.estado == cfg.opciones.ext_shop.venta.estado_en_espera)) {
       return true;
     } else {
       return false;
@@ -153,7 +153,7 @@ export class OrderInfoPage extends ProtectedPage {
   canStoreOrder(order: OrderModel) {
     let cfg = this.configService.remoteCfg;
 
-    if (this.isOrderDriver(order) && order.tipo == 'estandar' && order.estado == cfg.opciones.ext_shop.venta.estado_enviado) {
+    if (/*this.isOrderDriver(order) && */order.tipo == 'estandar' && order.estado == cfg.opciones.ext_shop.venta.estado_enviado) {
       return true;
     } else {
       return false;
@@ -167,7 +167,7 @@ export class OrderInfoPage extends ProtectedPage {
   canAddDocumentOrder(order: OrderModel) {
     let cfg = this.configService.remoteCfg;
 
-    if (this.isOrderDriver(order) && order.tipo == 'estandar' && (order.estado == cfg.opciones.ext_shop.venta.estado_enviado || order.estado == cfg.opciones.ext_shop.venta.estado_asociado || order.estado == cfg.opciones.ext_shop.venta.estado_en_espera)) {
+    if (/*this.isOrderDriver(order) && */order.tipo == 'estandar' && (order.estado == cfg.opciones.ext_shop.venta.estado_enviado || order.estado == cfg.opciones.ext_shop.venta.estado_asociado || order.estado == cfg.opciones.ext_shop.venta.estado_en_espera)) {
       return true;
     } else {
       return false;
@@ -181,7 +181,7 @@ export class OrderInfoPage extends ProtectedPage {
 
   openActions(order: OrderModel) {
     let buttons = [];
-    if (this.isUserProvider() && this.order.proveedor_id == 0) {
+    if (/*this.isUserProvider() && */this.order.proveedor_id == 0) {
       buttons.push({
         text: 'Asignar pedido',
         handler: () => {

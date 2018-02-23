@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { AuthService } from '../../providers/auth-service';
 import { MessagesServiceProvider } from '../../providers/messages-service/messages-service';
 import { MessageModel } from '../../models/message.model';
+import { ConfigServiceProvider } from '../../providers/config-service/config-service';
 
 @IonicPage()
 @Component({
@@ -36,8 +37,9 @@ export class MessageInfoPage extends ProtectedPage {
     public loadingCtr: LoadingController,
     public authService: AuthService,
     public formBuilder: FormBuilder,
-    public messagesService: MessagesServiceProvider) {
-    super(navCtrl, navParams, storage, authService);
+    public messagesService: MessagesServiceProvider,
+    public configService: ConfigServiceProvider) {
+    super(navCtrl, navParams, storage, authService, configService);
 
     this.message = navParams.get('message');
 
