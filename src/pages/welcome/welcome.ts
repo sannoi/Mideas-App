@@ -55,6 +55,10 @@ export class WelcomePage extends PublicPage {
   }
 
   enter() {
-    this.navCtrl.setRoot(this.configService.cfg.home_logged);
+    if (this.configService.cfg.appType == 'tabs' || this.configService.cfg.appType == 'menu&tabs') {
+      this.navCtrl.setRoot('TabsPage');
+    } else {
+      this.navCtrl.setRoot(this.configService.cfg.home_logged);
+    }
   }
 }

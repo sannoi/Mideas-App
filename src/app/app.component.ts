@@ -17,7 +17,6 @@ import { ItemsServiceProvider } from '../providers/items-service/items-service';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  @ViewChild('myTabs') tabRef: Tabs;
   rootPage: any = 'WelcomePage';
   pages: Array<{ title: string, icon?: string, component: any, method?: any }>;
   selectedTheme: string;
@@ -170,16 +169,6 @@ export class MyApp {
     });
 
     this.pages = pages;
-  }
-
-  tabRoot(page) {
-    page = this.configExtensionPage(page);
-    return page.component;
-  }
-
-  tabParams(page) {
-    page = this.configExtensionPage(page);
-    return page.nav_params;
   }
 
   openPage(page) {

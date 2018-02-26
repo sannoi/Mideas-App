@@ -1,8 +1,9 @@
 export let cfg = {
-  appType: 'menu',
+  appType: 'menu&tabs',
   configUrl: '/sistema/general/config.json',
   home_not_logged: 'WelcomePage',
   home_logged: 'ProfilePage',
+  tabs_page: 'TabsPage',
   localDBName: '__mideasApp',
   sites: [
     {

@@ -1,0 +1,3 @@
+<ion-tabs *ngIf="configService.cfg.appType == 'tabs' || configService.cfg.appType == 'menu&tabs'" color="dark" #myTabs>
+  <ion-tab *ngFor="let tab of configService.tabs" tabIcon="{{tab.icon}}" tabTitle="{{ tab.title }}" [root]="tabRoot(tab)" [rootParams]="tabParams(tab)"></ion-tab>
+</ion-tabs>
