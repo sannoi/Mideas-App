@@ -36,6 +36,7 @@ export let cfg = {
   ],
   extensions: {
     users: {
+      id: 'users',
       active: false,
       provider: 'usersService',
       list: {
@@ -59,10 +60,12 @@ export let cfg = {
       }
     },
     articles: {
+      id: 'articles',
       active: true,
       provider: 'itemsService',
       list: {
         use: true,
+        source: 'remote',
         max_items: 20,
         component: 'ListPage'
       },
@@ -76,6 +79,7 @@ export let cfg = {
       }
     },
     messages: {
+      id: 'messages',
       active: true,
       provider: 'messagesService',
       list: {
@@ -96,6 +100,7 @@ export let cfg = {
       }
     },
     orders: {
+      id: 'orders',
       active: true,
       provider: 'ordersService',
       list: {
@@ -117,6 +122,7 @@ export let cfg = {
       }
     },
     geolocation: {
+      id: 'geolocation',
       active: true,
       provider: 'locationService',
       list: {
@@ -127,6 +133,7 @@ export let cfg = {
       }
     },
     notifications: {
+      id: 'notifications',
       active: true,
       provider: 'notificationsService',
       list: {
