@@ -1,14 +1,8 @@
 export let menu = {
   pages: [
-    { title: 'page.profile', icon: 'desktop', component: 'ProfilePage', nav_params: { pageTitle: 'page.profile' } },
-    { title: 'page.orders.list', icon: 'cube', component: 'ListMasterPage', nav_params: { pageTitle: 'page.orders.list' } },
-    { title: 'page.orders.listNotAssigned', icon: 'share-alt', require_user_type: 'proveedor', component: 'ListMasterPage', nav_params: { pageTitle: 'page.orders.listNotAssigned', onlyNotAssigned: true } },
-    { title: 'page.messages', icon: 'chatboxes', extension: 'messages', type: 'list', nav_params: { pageTitle: 'page.messages', pageType: 'all' } },
-    { title: 'page.map', icon: 'map', component: 'MapPage', nav_params: { pageTitle: 'page.map' } },
-    { title: 'page.settings', icon: 'cog', component: 'SettingsListPage', nav_params: { pageTitle: 'page.settings' } },
-    { title: 'page.logout', icon: 'exit', component: 'WelcomePage', method: 'logout' },
+    { title: 'page.profile', icon: 'desktop', component: 'ProfilePage', index: 0, nav_params: { pageTitle: 'page.profile' } },    
     {
-      title: 'Blog', icon: 'chatboxes', extension: 'articles', type: 'list', nav_params: {
+      title: 'Blog', icon: 'chatboxes', extension: 'articles', type: 'list', index: 1, nav_params: {
         pageTitle: 'Artículos',
         category: 2,
         order: 'fecha',
@@ -18,13 +12,15 @@ export let menu = {
       }
     },
     {
-      title: 'Multimedia', icon: 'chatboxes', extension: 'articles', type: 'list', nav_params: {
+      title: 'Multimedia', icon: 'chatboxes', extension: 'articles', type: 'list', index: 2, nav_params: {
         pageTitle: 'Multimedia',
         category: 3,
         order: 'titulo',
         orderDir: 'ASC',
         detailOptions: { show_title: true, show_image: true, show_description: true, show_gallery: true }
       }
-    }
+    },
+    { title: 'page.settings', icon: 'cog', component: 'SettingsListPage', index: 3, nav_params: { pageTitle: 'page.settings' } },
+    { title: 'page.logout', icon: 'exit', component: 'WelcomePage', method: 'logout' }
   ]
 };

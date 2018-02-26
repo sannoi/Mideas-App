@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, AlertController, LoadingController, Tabs } from 'ionic-angular';
+import { Nav, Platform, AlertController, LoadingController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
@@ -178,13 +178,19 @@ export class MyApp {
   openLink(page) {
     page = this.configExtensionPage(page);
 
+    if (page.index != undefined && (this.configService.cfg.appType == 'tabs' || this.configService.cfg.appType == 'menu&tabs')) {
+      page.nav_params.tabIndex = page.index;
+      page.component = this.configService.cfg.tabs_page;
+      console.log(page);
+    }
+
     if (page.method && page.method === 'logout' && this.configService.cfg.extensions.users.active) {
       this.loading = this.loadingCtrl.create({
         content: 'Cerrando sesión...'
       });
       this.loading.present();
       this.authService.logout().then(result => {
-        this.loading.dismiss
+        this.loading.dismiss();
         if (this.configService.cfg.appType == 'menu') {
           this.nav.setRoot(page.component, page.nav_params);
         } else {
@@ -193,7 +199,7 @@ export class MyApp {
         }
       });
     } else {
-      if (this.configService.cfg.appType == 'menu') {
+      if (this.configService.cfg.appType == 'menu' || (page.nav_params && page.nav_params.tabIndex)) {
         this.nav.setRoot(page.component, page.nav_params);
       } else {
         //this.tabRef.push(page.component, page.nav_params);

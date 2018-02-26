@@ -10,11 +10,21 @@ import { ConfigServiceProvider } from '../../providers/config-service/config-ser
 export class TabsPage {
   @ViewChild('myTabs') tabRef: Tabs;
 
+  currentIndex: any;
+  currentTab: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public configService: ConfigServiceProvider) {
+    this.currentIndex = 0;
+
+    if (navParams.get("tabIndex")) {
+      this.currentIndex = navParams.get("tabIndex");
+    }
   }
 
-  ionViewDidLoad() {
-  }
+  ionViewDidEnter() {
+    this.tabRef.select(this.currentIndex);
+    this.currentTab = this.tabRef.getSelected();//Returns the currently selected tab
+   }
 
   tabRoot(page) {
     page = this.configExtensionPage(page);

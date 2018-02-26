@@ -1,5 +1,5 @@
 export let cfg = {
-  appType: 'menu&tabs',
+  appType: 'menu',
   configUrl: '/sistema/general/config.json',
   home_not_logged: 'WelcomePage',
   home_logged: 'ProfilePage',
