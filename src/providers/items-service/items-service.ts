@@ -70,6 +70,11 @@ export class ItemsServiceProvider {
               return x.propietario == this.authService.getUsr().id;
             });
           }
+          if (category) {
+            items = items.filter(function(x) {
+              return x.categorias.indexOf(category) > -1;
+            });
+          }
           var init = (page - 1) * this.config.max_items;
           filtered = items.slice(init, this.config.max_items - 1);
         } else {
