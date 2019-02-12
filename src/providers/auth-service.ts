@@ -12,7 +12,7 @@ import { LocationServiceProvider } from './location-service';
 import { UsersService } from './users-service';
 import { Observable } from 'rxjs/Rx';
 import { AlertController } from 'ionic-angular';
-import {ConfigServiceProvider} from './config-service/config-service';
+import { ConfigServiceProvider } from './config-service/config-service';
 
 @Injectable()
 export class AuthService {
@@ -34,12 +34,12 @@ export class AuthService {
     private jwtHelper: JwtHelper,
     private authHttp: AuthHttp,
     private configService: ConfigServiceProvider) {
-      this.usr = new BehaviorSubject(null);
-    }
+    this.usr = new BehaviorSubject(null);
+  }
 
-    initialize() {
-      return this.initializeUser();
-    }
+  initialize() {
+    return this.initializeUser();
+  }
 
   public initializeUser() {
     return this.storage.get('id_token').then(token => {
@@ -85,16 +85,24 @@ export class AuthService {
           this.lastError = rs.response_text;
           return false;
         } else {
-          return this.usersService.saveFirebaseDeviceToken(this.firebaseToken).then(result => {
-            console.log('Token de Firebase guardado: ' + this.firebaseToken);
+          if (this.configService.cfg.config_settings.firebase.use == true) {
+            return this.usersService.saveFirebaseDeviceToken(this.firebaseToken).then(result => {
+              console.log('Token de Firebase guardado: ' + this.firebaseToken);
+              return this.saveData(data).then(res => {
+                this.idToken = rs.data.jwt;
+                this.setUsr(rs.data.usr);
+                this.getFormToken();
+                return true;
+              });
+            });
+          } else {
             return this.saveData(data).then(res => {
               this.idToken = rs.data.jwt;
               this.setUsr(rs.data.usr);
               this.getFormToken();
               return true;
             });
-
-          });
+          }
         }
       })
       .catch(e => console.log('login error', e));
@@ -106,12 +114,16 @@ export class AuthService {
     this.storage.set("user", rs.data.usr);
     this.storage.set("id_token", rs.data.jwt);
 
-    if (rs.data.usr.permisos_app.canAssignOrders == '1') {
-      this.userType = "proveedor";
-    } else if (rs.data.usr.permisos_app.canManageOrderStates == '1') {
-      this.userType = "conductor";
+    if (rs.data.usr.permisos_app != undefined) {
+      if (rs.data.usr.permisos_app.canAssignOrders == '1') {
+        this.userType = "proveedor";
+      } else if (rs.data.usr.permisos_app.canManageOrderStates == '1') {
+        this.userType = "conductor";
+      } else {
+        this.userType = "cliente";
+      }
     } else {
-      this.userType = "cliente";
+      this.userType = "usuario";
     }
 
     return this.storage.set("userType", this.userType).then(uType => {

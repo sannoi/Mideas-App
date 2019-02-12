@@ -25,7 +25,7 @@ export class UsersService {
               modal: {
                 enableBackdropDismiss: false,
                 title: 'Cuenta pendiente de validar',
-                message: 'Tu cuenta está pendiente de validar. Si necesitas más información puedes escribirnos a operaciones@booboo.eu'
+                message: 'Tu cuenta está pendiente de validar. Revisa tu correo electrónico.'
               },
               modal_buttons: [
                 { text: "Salir", navToMenuLink: 6 }

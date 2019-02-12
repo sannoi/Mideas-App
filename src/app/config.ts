@@ -14,7 +14,7 @@ export let cfg = {
       color: 'rgb(255, 0, 0)',
       logo: 'assets/img/vp_logo.png',
       theme: 'red-theme'
-    },
+    }/*,
     {
       name: 'Last Mile',
       slogan: 'Tu red de transportes integral',
@@ -32,12 +32,12 @@ export let cfg = {
       color: 'rgb(255, 139, 187)',
       logo: 'assets/img/booboo_ico.png',
       theme: 'pink-theme'
-    }
+    }*/
   ],
   extensions: {
     users: {
       id: 'users',
-      active: false,
+      active: true,
       provider: 'usersService',
       list: {
         use: true,
@@ -148,9 +148,12 @@ export let cfg = {
     app: {
       geolocation: 'off',
       notifications: 'off'
+    },
+    firebase: {
+      use: false
     }
   },
-  min_level_access_user: 2,
+  min_level_access_user: 0,
   system: {
     upload: '/sistema/archivo/upload.json'
   },

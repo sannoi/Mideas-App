@@ -72,7 +72,7 @@ export class LoginPage {
             if (parseInt(this.authService.getUsr().nivel_acceso) < parseInt(this.configService.cfg.min_level_access_user)) {
               this.alert = this.alertCtrl.create({
                 title: 'Cuenta pendiente de validar',
-                message: 'Tu cuenta está pendiente de validar. Si necesitas más información puedes escribirnos a operaciones@booboo.eu',
+                message: 'Tu cuenta está pendiente de validar. Revisa tu correo electrónico.',
                 buttons: [
                   {
                     text: 'Salir',
